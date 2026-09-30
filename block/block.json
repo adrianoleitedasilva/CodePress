@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "codepress/code",
+	"version": "1.1.0",
+	"title": "CodePress",
+	"category": "text",
+	"icon": "editor-code",
+	"description": "Bloco de código com destaque de sintaxe, números de linha, cabeçalho e botão Copiar, no estilo do VS Code.",
+	"keywords": [ "código", "code", "sintaxe", "programação", "snippet" ],
+	"textdomain": "codepress",
+	"attributes": {
+		"code": { "type": "string", "default": "" },
+		"language": { "type": "string", "default": "javascript" },
+		"title": { "type": "string", "default": "" },
+		"filename": { "type": "string", "default": "" },
+		"showHeader": { "type": "boolean", "default": true },
+		"showIcon": { "type": "boolean", "default": true },
+		"showCopy": { "type": "boolean", "default": true },
+		"lineNumbers": { "type": "boolean" },
+		"startLine": { "type": "number", "default": 1 },
+		"highlightLines": { "type": "string", "default": "" },
+		"wrap": { "type": "boolean" },
+		"theme": { "type": "string", "enum": [ "dark", "light", "auto" ] },
+		"fontSize": { "type": "number" },
+		"lineHeight": { "type": "number" },
+		"borderRadius": { "type": "number" },
+		"showBorder": { "type": "boolean" },
+		"collapsible": { "type": "boolean", "default": false },
+		"collapsedLines": { "type": "number", "default": 15 }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": [ "wide", "full" ],
+		"spacing": { "margin": [ "top", "bottom" ] }
+	},
+	"example": {
+		"attributes": {
+			"language": "javascript",
+			"filename": "user.js",
+			"code": "const user = await getUser();\n\nconsole.log(user);",
+			"highlightLines": "1"
+		}
+	},
+	"editorScript": "file:./editor.js",
+	"viewScript": "file:./view.js",
+	"style": "file:./style.css",
+	"editorStyle": "file:./editor.css",
+	"render": "file:./render.php"
+}

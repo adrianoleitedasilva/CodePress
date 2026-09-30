@@ -1,0 +1,315 @@
+/**
+ * CodePress — aparência do bloco (site e editor).
+ *
+ * Tudo é controlado por variáveis: o tema (dark/light/auto) define as cores e
+ * o bloco define --cp-font-size, --cp-line-height, --cp-radius e --cp-digits.
+ * Os seletores começam por .codepress para vencer estilos genéricos de <pre>
+ * do tema ativo.
+ */
+
+/* ---------- Temas (cores no estilo VS Code Dark+ e Light+) ---------- */
+.codepress,
+.codepress--dark {
+	--cp-bg: #1e1e1e;
+	--cp-fg: #d4d4d4;
+	--cp-header-bg: #252526;
+	--cp-header-fg: #cccccc;
+	--cp-border: #3c3c3c;
+	--cp-ln: #6e7681;
+	--cp-ln-active: #c6c6c6;
+	--cp-hl-bg: rgba(255, 255, 255, .07);
+	--cp-hl-bar: #0078d4;
+	--cp-selection: #264f78;
+	--cp-btn-hover: rgba(255, 255, 255, .1);
+	--cp-t-comment: #6a9955;
+	--cp-t-keyword: #569cd6;
+	--cp-t-control: #c586c0;
+	--cp-t-string: #ce9178;
+	--cp-t-number: #b5cea8;
+	--cp-t-function: #dcdcaa;
+	--cp-t-type: #4ec9b0;
+	--cp-t-variable: #9cdcfe;
+	--cp-t-constant: #4fc1ff;
+	--cp-t-operator: #d4d4d4;
+	--cp-t-punct: #d4d4d4;
+	--cp-t-tag: #569cd6;
+	--cp-t-attr: #9cdcfe;
+	--cp-t-attr-value: #ce9178;
+	--cp-t-selector: #d7ba7d;
+	--cp-t-regex: #d16969;
+	--cp-t-inserted: #b5cea8;
+	--cp-t-deleted: #ce9178;
+	color-scheme: dark;
+}
+
+.codepress--light,
+.codepress--auto {
+	--cp-bg: #ffffff;
+	--cp-fg: #1f1f1f;
+	--cp-header-bg: #f3f3f3;
+	--cp-header-fg: #3b3b3b;
+	--cp-border: #e0e0e0;
+	--cp-ln: #6e7781;
+	--cp-ln-active: #0b216f;
+	--cp-hl-bg: rgba(0, 120, 212, .08);
+	--cp-hl-bar: #0078d4;
+	--cp-selection: #add6ff;
+	--cp-btn-hover: rgba(0, 0, 0, .06);
+	--cp-t-comment: #008000;
+	--cp-t-keyword: #0000ff;
+	--cp-t-control: #af00db;
+	--cp-t-string: #a31515;
+	--cp-t-number: #098658;
+	--cp-t-function: #795e26;
+	--cp-t-type: #267f99;
+	--cp-t-variable: #001080;
+	--cp-t-constant: #0070c1;
+	--cp-t-operator: #1f1f1f;
+	--cp-t-punct: #1f1f1f;
+	--cp-t-tag: #800000;
+	--cp-t-attr: #e50000;
+	--cp-t-attr-value: #0000ff;
+	--cp-t-selector: #800000;
+	--cp-t-regex: #811f3f;
+	--cp-t-inserted: #098658;
+	--cp-t-deleted: #a31515;
+	color-scheme: light;
+}
+
+/* Automático: escuro quando o site está no modo escuro (data-theme="dark", usado
+   pelo tema Root WP) ou, em temas sem essa marcação, quando o sistema está escuro. */
+html[data-theme="dark"] .codepress--auto {
+	--cp-bg: #1e1e1e;
+	--cp-fg: #d4d4d4;
+	--cp-header-bg: #252526;
+	--cp-header-fg: #cccccc;
+	--cp-border: #3c3c3c;
+	--cp-ln: #6e7681;
+	--cp-ln-active: #c6c6c6;
+	--cp-hl-bg: rgba(255, 255, 255, .07);
+	--cp-selection: #264f78;
+	--cp-btn-hover: rgba(255, 255, 255, .1);
+	--cp-t-comment: #6a9955;
+	--cp-t-keyword: #569cd6;
+	--cp-t-control: #c586c0;
+	--cp-t-string: #ce9178;
+	--cp-t-number: #b5cea8;
+	--cp-t-function: #dcdcaa;
+	--cp-t-type: #4ec9b0;
+	--cp-t-variable: #9cdcfe;
+	--cp-t-constant: #4fc1ff;
+	--cp-t-operator: #d4d4d4;
+	--cp-t-punct: #d4d4d4;
+	--cp-t-tag: #569cd6;
+	--cp-t-attr: #9cdcfe;
+	--cp-t-attr-value: #ce9178;
+	--cp-t-selector: #d7ba7d;
+	--cp-t-regex: #d16969;
+	--cp-t-inserted: #b5cea8;
+	--cp-t-deleted: #ce9178;
+	color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+	html:not([data-theme]) .codepress--auto {
+		--cp-bg: #1e1e1e;
+		--cp-fg: #d4d4d4;
+		--cp-header-bg: #252526;
+		--cp-header-fg: #cccccc;
+		--cp-border: #3c3c3c;
+		--cp-ln: #6e7681;
+		--cp-ln-active: #c6c6c6;
+		--cp-hl-bg: rgba(255, 255, 255, .07);
+		--cp-selection: #264f78;
+		--cp-btn-hover: rgba(255, 255, 255, .1);
+		--cp-t-comment: #6a9955;
+		--cp-t-keyword: #569cd6;
+		--cp-t-control: #c586c0;
+		--cp-t-string: #ce9178;
+		--cp-t-number: #b5cea8;
+		--cp-t-function: #dcdcaa;
+		--cp-t-type: #4ec9b0;
+		--cp-t-variable: #9cdcfe;
+		--cp-t-constant: #4fc1ff;
+		--cp-t-operator: #d4d4d4;
+		--cp-t-punct: #d4d4d4;
+		--cp-t-tag: #569cd6;
+		--cp-t-attr: #9cdcfe;
+		--cp-t-attr-value: #ce9178;
+		--cp-t-selector: #d7ba7d;
+		--cp-t-regex: #d16969;
+		--cp-t-inserted: #b5cea8;
+		--cp-t-deleted: #ce9178;
+		color-scheme: dark;
+	}
+}
+
+/* ---------- Caixa ---------- */
+.codepress {
+	--cp-font: var(--codepress-font, "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, "SFMono-Regular", Menlo, monospace);
+	--cp-pad-x: 18px;
+	--cp-gutter: calc(var(--cp-digits, 2) * 1ch + 20px);
+	position: relative;
+	margin: 1.8em 0;
+	overflow: hidden;
+	border: 1px solid transparent;
+	border-radius: var(--cp-radius, 10px);
+	background: var(--cp-bg);
+	color: var(--cp-fg);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 6px 20px rgba(0, 0, 0, .06);
+	font-size: var(--cp-font-size, 14px);
+	text-align: left;
+}
+.codepress.has-border { border-color: var(--cp-border); }
+
+/* ---------- Cabeçalho: padrão único "janela de editor" ----------
+   Bolinhas da janela, uma aba (arquivo, título ou linguagem) e, à direita,
+   a linguagem e os botões — sempre no mesmo lugar em todas as caixas. */
+.codepress .codepress__header {
+	display: flex; align-items: stretch; gap: 0; height: 42px; margin: 0; padding: 0 8px 0 16px;
+	background: var(--cp-header-bg); color: var(--cp-header-fg); border-bottom: 1px solid var(--cp-border);
+	font-family: var(--font-sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif); font-size: 12.5px; line-height: 1.3;
+	font-style: normal; text-align: left;
+}
+.codepress__dots { display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0; margin-right: 16px; }
+.codepress__dots i { display: block; width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.codepress__dots i:nth-child(2) { background: #febc2e; }
+.codepress__dots i:nth-child(3) { background: #28c840; }
+
+/* A aba "encosta" no código: mesma cor de fundo e sem borda embaixo. */
+.codepress__tab {
+	position: relative; top: 1px; align-self: flex-end; display: inline-flex; align-items: center; gap: 7px;
+	min-width: 0; max-width: 55%; height: 33px; padding: 0 14px;
+	background: var(--cp-bg); color: var(--cp-fg); border: 1px solid var(--cp-border); border-bottom: 0;
+	border-radius: 8px 8px 0 0; box-shadow: inset 0 2px 0 var(--cp-hl-bar);
+	font-family: var(--cp-font); font-size: 12.5px; font-weight: 500;
+}
+.codepress__tab-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.codepress__glyph, .codepress__glyph-wrap svg { display: block; width: 15px; height: 15px; flex-shrink: 0; color: var(--cp-ln); }
+.codepress__glyph-wrap { display: inline-flex; }
+
+.codepress__subtitle {
+	align-self: center; min-width: 0; margin-left: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+	color: var(--cp-ln); font-weight: 500;
+}
+.codepress__actions { display: inline-flex; align-items: center; gap: 2px; flex-shrink: 0; margin-left: auto; padding-left: 12px; }
+.codepress__lang {
+	margin-right: 4px; padding: 0 6px; color: var(--cp-ln);
+	font-family: var(--cp-font); font-size: 11.5px; text-transform: lowercase; white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+	.codepress__subtitle { display: none; }
+	.codepress__tab { max-width: 60%; }
+}
+@media (max-width: 420px) {
+	.codepress__dots, .codepress__lang { display: none; }
+	.codepress .codepress__header { padding-left: 10px; }
+}
+
+.codepress .codepress__btn {
+	display: inline-flex; align-items: center; gap: 6px; height: 28px; margin: 0; padding: 0 10px;
+	border: 1px solid transparent; border-radius: 6px; background: transparent; color: inherit; box-shadow: none;
+	font: 600 12px/1 var(--font-sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif); cursor: pointer; text-transform: none; letter-spacing: 0;
+	transition: background .15s, color .15s, border-color .15s;
+}
+.codepress .codepress__btn:hover { background: var(--cp-btn-hover); color: inherit; }
+.codepress .codepress__btn:focus-visible { outline: 2px solid var(--cp-hl-bar); outline-offset: 1px; }
+.codepress__btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.codepress__copy-done { display: none; }
+.codepress__copy.is-copied { color: #3fb950; }
+.codepress__copy.is-copied .codepress__copy-icon { display: none; }
+.codepress__copy.is-copied .codepress__copy-done { display: inline-flex; }
+.codepress__fold svg { transition: transform .2s; }
+.codepress.is-collapsed .codepress__fold svg { transform: rotate(180deg); }
+.codepress__btn.is-static { cursor: default; opacity: .75; }
+
+/* Botão Copiar flutuante (quando o cabeçalho está desligado). */
+.codepress__float { position: absolute; top: 8px; right: 8px; z-index: 2; opacity: 0; transition: opacity .15s; }
+.codepress__float .codepress__btn { background: var(--cp-header-bg); border-color: var(--cp-border); color: var(--cp-header-fg); }
+.codepress:hover .codepress__float, .codepress__float:focus-within { opacity: 1; }
+@media (hover: none) { .codepress__float { opacity: 1; } }
+
+/* ---------- Código ---------- */
+.codepress__body { position: relative; }
+.codepress .codepress__pre {
+	display: block; margin: 0; padding: 14px 0; overflow-x: auto; overflow-y: hidden;
+	background: transparent; color: var(--cp-fg); border: 0; border-radius: 0; box-shadow: none;
+	font-family: var(--cp-font); font-size: var(--cp-font-size, 14px); line-height: var(--cp-line-height, 1.6);
+	font-variant-ligatures: none; tab-size: 4; -moz-tab-size: 4; white-space: pre; word-spacing: normal; text-shadow: none;
+}
+.codepress .codepress__pre:focus-visible { outline: 2px solid var(--cp-hl-bar); outline-offset: -2px; }
+.codepress .codepress__pre code {
+	display: block; min-width: 100%; width: max-content; margin: 0; padding: 0;
+	background: none; color: inherit; border: 0; border-radius: 0; font: inherit; white-space: inherit;
+}
+.codepress ::selection { background: var(--cp-selection); }
+
+.codepress .cp-line {
+	display: block; position: relative; min-height: calc(var(--cp-font-size, 14px) * var(--cp-line-height, 1.6));
+	padding: 0 var(--cp-pad-x);
+}
+/* Antes do JavaScript (ou sem ele), o código aparece com o mesmo recuo das linhas. */
+.codepress:not(.is-ready) .codepress__pre code { padding: 0 var(--cp-pad-x); }
+
+/* Números das linhas: gerados pelo CSS, não entram na seleção nem na cópia. */
+.codepress.has-numbers .cp-line { padding-left: calc(var(--cp-gutter) + 14px); }
+.codepress.has-numbers .cp-line::before {
+	content: attr(data-ln); position: absolute; top: 0; left: 0; width: var(--cp-gutter); padding-right: 2px;
+	text-align: right; color: var(--cp-ln); user-select: none; -webkit-user-select: none; pointer-events: none;
+}
+.codepress.has-numbers .cp-line.is-highlighted::before { color: var(--cp-ln-active); }
+
+/* Linhas destacadas. */
+.codepress .cp-line.is-highlighted { background: var(--cp-hl-bg); box-shadow: inset 3px 0 0 var(--cp-hl-bar); }
+
+/* Quebra de linha opcional. */
+.codepress.is-wrap .codepress__pre { white-space: pre-wrap; overflow-x: hidden; overflow-wrap: anywhere; }
+.codepress.is-wrap .codepress__pre code { width: auto; }
+
+/* ---------- Código recolhido ---------- */
+.codepress.is-collapsed .codepress__body {
+	max-height: calc(var(--cp-collapsed-lines, 15) * var(--cp-font-size, 14px) * var(--cp-line-height, 1.6) + 14px);
+	overflow: hidden;
+}
+.codepress.is-collapsed .codepress__body::after {
+	content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 72px; pointer-events: none;
+	background: linear-gradient(transparent, var(--cp-bg));
+}
+.codepress .codepress__more {
+	display: none; width: 100%; margin: 0; padding: 10px; border: 0; border-top: 1px solid var(--cp-border); border-radius: 0;
+	background: var(--cp-header-bg); color: var(--cp-header-fg); box-shadow: none; cursor: pointer;
+	font: 600 12.5px/1.3 var(--font-sans, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+}
+.codepress .codepress__more:hover { color: var(--cp-hl-bar); }
+.codepress.is-collapsed .codepress__more { display: block; }
+
+/* ---------- Cores dos tokens (Prism) ---------- */
+.codepress .token.comment, .codepress .token.prolog, .codepress .token.doctype, .codepress .token.cdata { color: var(--cp-t-comment); font-style: italic; }
+.codepress .token.punctuation { color: var(--cp-t-punct); }
+.codepress .token.keyword, .codepress .token.boolean, .codepress .token.important, .codepress .token.atrule, .codepress .token.rule, .codepress .token.delimiter { color: var(--cp-t-keyword); }
+.codepress .token.keyword.control-flow, .codepress .token.keyword.module { color: var(--cp-t-control); }
+.codepress .token.string, .codepress .token.char, .codepress .token.template-string, .codepress .token.url { color: var(--cp-t-string); }
+.codepress .token.number { color: var(--cp-t-number); }
+.codepress .token.function, .codepress .token.method { color: var(--cp-t-function); }
+.codepress .token.class-name, .codepress .token.builtin, .codepress .token.namespace, .codepress .token.maybe-class-name { color: var(--cp-t-type); }
+.codepress .token.variable, .codepress .token.property, .codepress .token.parameter, .codepress .token.property-access { color: var(--cp-t-variable); }
+.codepress .token.constant, .codepress .token.symbol, .codepress .token.entity { color: var(--cp-t-constant); }
+.codepress .token.operator { color: var(--cp-t-operator); }
+.codepress .token.tag { color: var(--cp-t-tag); }
+.codepress .token.tag .token.punctuation { color: var(--cp-ln); }
+.codepress .token.attr-name { color: var(--cp-t-attr); }
+.codepress .token.attr-value, .codepress .token.attr-value .token.punctuation { color: var(--cp-t-attr-value); }
+.codepress .token.selector { color: var(--cp-t-selector); }
+.codepress .token.regex { color: var(--cp-t-regex); }
+.codepress .token.inserted { color: var(--cp-t-inserted); }
+.codepress .token.deleted { color: var(--cp-t-deleted); }
+.codepress .token.bold { font-weight: 700; }
+.codepress .token.italic { font-style: italic; }
+.codepress .token.template-string .token.interpolation { color: var(--cp-fg); }
+.codepress .token.interpolation-punctuation { color: var(--cp-t-keyword); }
+
+@media print {
+	.codepress { box-shadow: none; }
+	.codepress.is-collapsed .codepress__body { max-height: none; }
+	.codepress__actions, .codepress__more, .codepress__float, .codepress__body::after { display: none !important; }
+}

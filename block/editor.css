@@ -1,0 +1,32 @@
+/**
+ * CodePress no editor: o <textarea> transparente fica exatamente sobre o
+ * código colorido. Os dois ocupam a mesma célula de uma grade, com a mesma
+ * fonte, tamanho, espaçamento e recuo — por isso o cursor "cai" no lugar certo.
+ */
+.codepress.is-editing .codepress__pre { overflow: visible; }
+.codepress.is-editing .codepress__body { overflow-x: auto; }
+.codepress.is-editing.is-wrap .codepress__body { overflow-x: hidden; }
+
+.codepress .cp-edit { display: grid; min-width: 100%; width: max-content; }
+.codepress.is-wrap .cp-edit { width: auto; }
+.codepress .cp-edit > .codepress__pre,
+.codepress .cp-edit > .cp-input { grid-area: 1 / 1; }
+
+.codepress .cp-input {
+	display: block; box-sizing: border-box; width: 100%; height: 100%; min-height: 3em; margin: 0;
+	padding: 14px var(--cp-pad-x); overflow: hidden; resize: none; z-index: 1;
+	border: 0; border-radius: 0; outline: 0; box-shadow: none; background: transparent;
+	color: transparent; caret-color: var(--cp-fg); -webkit-text-fill-color: transparent;
+	font-family: var(--cp-font); font-size: var(--cp-font-size, 14px); line-height: var(--cp-line-height, 1.6);
+	font-variant-ligatures: none; letter-spacing: normal; word-spacing: normal; tab-size: 4; -moz-tab-size: 4;
+	white-space: pre; overflow-wrap: normal;
+}
+.codepress.has-numbers .cp-input { padding-left: calc(var(--cp-gutter) + 14px); } /* mesmo recuo das linhas numeradas */
+.codepress.is-wrap .cp-input { white-space: pre-wrap; overflow-wrap: anywhere; }
+.codepress .cp-input::selection { background: var(--cp-selection); color: transparent; -webkit-text-fill-color: transparent; }
+.codepress .cp-input::placeholder { color: var(--cp-ln); -webkit-text-fill-color: var(--cp-ln); opacity: 1; }
+.codepress .cp-input:focus { outline: 0; box-shadow: none; }
+.codepress.is-editing:focus-within { box-shadow: 0 0 0 2px var(--cp-hl-bar), 0 6px 20px rgba(0, 0, 0, .08); }
+
+/* No editor, o código nunca aparece recolhido. */
+.codepress.is-editing .codepress__body { max-height: none; }
